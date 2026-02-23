@@ -1,0 +1,14 @@
+services:
+  image-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '${PORT:-3000}:3000'
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - STORAGE_PATH=/data/storage
+    volumes:
+      - ${HOST_STORAGE_PATH:-./storage}:/data/storage
+    restart: unless-stopped

@@ -5,11 +5,13 @@ import { AppService } from './app.service.js';
 import { ConfigModule } from './config/config.module.js';
 import { PinoConfig } from './config/pino.config.js';
 import { globalProviders } from './core/providers/index.js';
+import { FileModule } from './file/file.module.js';
 
 @Module({
   imports: [
     ConfigModule,
     LoggerModule.forRoot({ pinoHttp: PinoConfig.getPinoHttpConfig() }),
+    FileModule,
   ],
   controllers: [AppController],
   providers: [AppService, ...globalProviders],

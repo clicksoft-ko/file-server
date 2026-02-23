@@ -16,4 +16,8 @@ export class ConfigService {
   get isProduction(): boolean {
     return this.nodeEnv === 'production';
   }
+
+  get storagePath(): string {
+    return this.configService.get('STORAGE_PATH') || './storage';
+  }
 }

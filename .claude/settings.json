@@ -10,7 +10,10 @@
       "Bash(pnpm i:*)",
       "Bash(pnpm run build:*)",
       "mcp__obsidian__write_note",
-      "mcp__obsidian__patch_note"
+      "mcp__obsidian__patch_note",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm run lint)",
+      "Bash(pnpm run start:dev:*)"
     ],
     "additionalDirectories": [
       "d:\\Apps\\image-server"
