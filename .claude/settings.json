@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__obsidian__search_notes",
+      "mcp__obsidian__list_directory",
+      "mcp__obsidian__read_multiple_notes",
+      "mcp__context7__resolve-library-id",
+      "Bash(python3:*)",
+      "Bash(node -e:*)",
+      "Bash(pnpm i:*)",
+      "Bash(pnpm run build:*)",
+      "mcp__obsidian__write_note",
+      "mcp__obsidian__patch_note"
+    ],
+    "additionalDirectories": [
+      "d:\\Apps\\image-server"
+    ]
+  }
+}
