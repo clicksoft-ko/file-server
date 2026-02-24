@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: file-server-pv
+  name: {{ .Release.Name }}-pv
 spec:
   capacity:
-    storage: 1Ti
+    storage: {{ .Values.storage.size }}
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: file-server-storage
+  storageClassName: {{ .Release.Name }}-storage
   hostPath:
-    path: /mnt/d/Data/file-server
+    path: {{ .Values.storage.hostPath }}
     type: DirectoryOrCreate

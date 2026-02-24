@@ -1,0 +1,23 @@
+image:
+  repository: ghcr.io/clicksoft-ko/file-server/file-server
+  tag: latest
+  pullPolicy: Always
+
+replicas: 1
+
+service:
+  type: NodePort
+  port: 3000
+  nodePort: 30300
+
+storage:
+  hostPath: /mnt/c/Data/file-server
+  size: 1Ti
+
+resources:
+  requests:
+    memory: '128Mi'
+    cpu: '100m'
+  limits:
+    memory: '512Mi'
+    cpu: '500m'
