@@ -6,9 +6,13 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/clicksoft-ko/image-server.git # 리포지토리 URL
+    repoURL: https://github.com/clicksoft-ko/file-server.git # 리포지토리 URL
     targetRevision: main
-    path: k8s # Helm 차트 경로
+    path: k8s/helm # Helm 차트 경로
+    helm:
+      parameters:
+        - name: storage.hostPath
+          value: /mnt/c/Data/file-server
   destination:
     server: https://kubernetes.default.svc # in-cluster
     namespace: default
