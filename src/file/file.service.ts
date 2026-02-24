@@ -85,7 +85,7 @@ export class FileService {
   async getFileStream(
     category: string,
     key: string,
-  ): Promise<{ stream: fs.ReadStream; mimetype: string; size: number }> {
+  ): Promise<{ stream: fs.ReadStream; mimetype: string; size: number; mtimeMs: number }> {
     const fileInfo = await this.findFile(category, key);
     if (!fileInfo) {
       throw new NotFoundException(
@@ -96,6 +96,6 @@ export class FileService {
     const stat = await fsp.stat(fileInfo.filePath);
     const stream = fs.createReadStream(fileInfo.filePath);
 
-    return { stream, mimetype: fileInfo.mimetype, size: stat.size };
+    return { stream, mimetype: fileInfo.mimetype, size: stat.size, mtimeMs: stat.mtimeMs };
   }
 }

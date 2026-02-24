@@ -8,7 +8,8 @@ import {
   Param,
   Post,
   Query,
-  StreamableFile,
+  Req,
+  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -21,6 +22,7 @@ import {
   ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
+import type { Request, Response } from 'express';
 import { FileService } from './file.service.js';
 import { FileParamsDto, UploadQueryDto } from './dto/file-params.dto.js';
 
@@ -76,11 +78,29 @@ export class FileController {
   @ApiOperation({ summary: '파일 다운로드 (스트리밍)' })
   @ApiParam({ name: 'category', description: '파일 종류' })
   @ApiParam({ name: 'key', description: '고유키' })
-  async stream(@Param() params: FileParamsDto): Promise<StreamableFile> {
-    const { stream, mimetype, size } = await this.fileService.getFileStream(
-      params.category,
-      params.key,
-    );
-    return new StreamableFile(stream, { type: mimetype, length: size });
+  async stream(
+    @Param() params: FileParamsDto,
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    const { stream, mimetype, size, mtimeMs } =
+      await this.fileService.getFileStream(params.category, params.key);
+
+    const etag = `"${mtimeMs.toString(36)}-${size.toString(36)}"`;
+
+    if (req.headers['if-none-match'] === etag) {
+      stream.destroy();
+      res.status(304).end();
+      return;
+    }
+
+    res.set({
+      'Content-Type': mimetype,
+      'Content-Length': size.toString(),
+      'Cache-Control': 'public, max-age=86400',
+      ETag: etag,
+    });
+
+    stream.pipe(res);
   }
 }

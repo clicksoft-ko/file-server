@@ -1,5 +1,5 @@
 services:
-  image-server:
+  file-server:
     build:
       context: .
       dockerfile: Dockerfile
