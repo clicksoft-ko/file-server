@@ -1,6 +1,6 @@
 image:
   repository: ghcr.io/clicksoft-ko/file-server/file-server
-  tag: 02c6c35
+  tag: 8ffd51e
   pullPolicy: Always
 
 replicas: 1
