@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: file-server-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: file-server-storage
+  resources:
+    requests:
+      storage: 1Ti
