@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: file-server
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/clicksoft-ko/image-server.git # 리포지토리 URL
+    targetRevision: main
+    path: k8s # Helm 차트 경로
+  destination:
+    server: https://kubernetes.default.svc # in-cluster
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true # Git에서 삭제된 리소스 자동 제거
+      selfHeal: true # 수동 변경 시 Git 상태로 자동 복구
+    syncOptions:
+      - CreateNamespace=true
