@@ -19,7 +19,9 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY package.json ./
 
-RUN mkdir -p /data/storage
+RUN mkdir -p /data/storage && chown -R 1000:1000 /data/storage
+
+USER 1000
 
 ENV NODE_ENV=production
 ENV STORAGE_PATH=/data/storage
