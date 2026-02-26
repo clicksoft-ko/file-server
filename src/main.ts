@@ -27,10 +27,8 @@ async function bootstrap() {
   // Logger (Pino)
   app.useLogger(app.get(Logger));
 
-  // Swagger (개발 환경만)
-  if (process.env.NODE_ENV !== 'production') {
-    setupSwagger(app);
-  }
+  // Swagger (Basic Auth 보호)
+  setupSwagger(app);
 
   await app.listen(process.env.PORT ?? 3000);
 }

@@ -27,6 +27,7 @@
     "@nestjs/swagger": "^11.2.6",
     "compression": "^1.8.1",
     "cross-env": "^10.1.0",
+    "express-basic-auth": "^1.2.1",
     "helmet": "^8.1.0",
     "nestjs-pino": "^4.6.0",
     "nestjs-zod": "^5.1.1",
