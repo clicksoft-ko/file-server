@@ -3,13 +3,10 @@ import { z } from 'zod';
 
 const FileParamsSchema = z.object({
   category: z
-    .string()
-    .min(1)
-    .max(100)
-    .regex(
-      /^[a-zA-Z0-9_-]+$/,
-      '카테고리는 영문, 숫자, 하이픈, 언더스코어만 허용됩니다',
-    ),
+    .enum(['optometry-capture'], {
+      message: "카테고리는 'optometry-capture'만 허용됩니다",
+    })
+    .describe("optometry-capture: capYYYY 테이블의 cap_gubun = 'S' 항목 이미지"),
   key: z
     .string()
     .min(1)
